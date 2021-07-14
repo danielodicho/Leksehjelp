@@ -6,29 +6,28 @@ var score = 0;
 var answeredRight  = true;
 void changeHomo;
 var counter = 1;
-var idfk1 = "Next";
+var nextButtonString = "Next";
 var numQuestions = 3;
 // ignore: top_level_function_literal_block
-var func;
-var homo;
-var fuckshitup = <Widget>[];
+var quizPageSetState;
+var questionColumn;
+var placeHolderWidget = <Widget>[];
 var questionDocument;
-var colorRight = Colors.blue;
-var colorWrong = Colors.blue;
 var title = "Can you get the question right?";
 
 var questionOrder = [];
-var start = () async {
-  numQuestions = 3;
+// ignore: top_level_function_literal_block
+var loadQuestions = (quiz) async {
+  questionOrder = [];
+  questionDocument = await Chaleno().load('https://donekun.github.io/quiz-test/${quiz.replaceAll(" ", "_")}');
+  numQuestions = questionDocument.getElementsByTagName("h").length;
   for (int i = 1; i<=numQuestions; i++ ) {
     // ignore: unnecessary_statements
     questionOrder.add(i);
   }
 
   questionOrder = shuffle(questionOrder);
-  print(questionOrder);
-  questionDocument = await Chaleno().load('https://donekun.github.io/quiz-test/');
-  homo = questionsCreate("question${questionOrder[0]}");
+  questionColumn = questionsCreate("question${questionOrder[0]}");
 };
 
 
@@ -50,18 +49,14 @@ List shuffle(List items) {
 }
 
 // ignore: top_level_function_literal_block
-var wrongAnswer = (index,nah,wrongColor) {
+var wrongAnswer = (index,questionAlternativeTextLocal,wrongColor) {
   return Container(
-      child: ElevatedButton(child: nah, onPressed: () {
-//colorRight = Colors.green;
+      child: ElevatedButton(child: questionAlternativeTextLocal, onPressed: () {
         title = "Hahaha you dumb as fuck";
-        print(homo);
         answeredRight = false;
-        fuckshitup[index] = wrongAnswer(index,nah, Colors.red);
-        homo[1] = Column(children: fuckshitup);
-        print(123123123);
-        print(nah);
-        func();
+        placeHolderWidget[index] = wrongAnswer(index,questionAlternativeTextLocal, Colors.red);
+        questionColumn[1] = Column(children: placeHolderWidget);
+        quizPageSetState();
       }
           ,style: ElevatedButton.styleFrom(primary: wrongColor)
       ),
@@ -78,11 +73,9 @@ var rightAnswer = (index,nah,rightColor) {
         if (answeredRight)
         {score+=1;}
         answeredRight = false;
-        fuckshitup[index] = rightAnswer(index,nah, Colors.green);
-        homo[1] = Column(children: fuckshitup);
-        print(index);
-        print(nah);
-        func();
+        placeHolderWidget[index] = rightAnswer(index,nah, Colors.green);
+        questionColumn[1] = Column(children: placeHolderWidget);
+        quizPageSetState();
       },style: ElevatedButton.styleFrom(primary: rightColor) ),
       margin: EdgeInsets.all(10)
   );
@@ -90,23 +83,23 @@ var rightAnswer = (index,nah,rightColor) {
 
 // ignore: non_constant_identifier_names, top_level_function_literal_block
 var questionsCreate = (className) {
-  fuckshitup = <Widget>[];
-  var dick = questionDocument.getElementsByClassName(className);
-  var cock  = [];
-  for (int i = 0; i<dick.length-1; i++ ) {
-    fuckshitup.add(Text("213123"));
+  placeHolderWidget = <Widget>[];
+  var questionAlternativeListHTML = questionDocument.getElementsByClassName(className);
+  var questionAlternativeOrder  = [];
+  for (int i = 0; i<questionAlternativeListHTML.length-1; i++ ) {
+    placeHolderWidget.add(Text("Place Holder Widget"));
   }
-  for (int i = 0; i< dick.length-1; i++){
-    cock.add(i);
+  for (int i = 0; i< questionAlternativeListHTML.length-1; i++){
+    questionAlternativeOrder.add(i);
   }
-  cock = shuffle(cock);
-  fuckshitup[cock[0]] = (rightAnswer(cock[0],Text(dick[1].text), Colors.blue));
-  for (int i = 2; i<dick.length; i++) {
-    var nah = Text(dick[i].text);
-    fuckshitup[cock[i-1]] = (wrongAnswer(cock[i-1],nah, Colors.blue));
+  questionAlternativeOrder = shuffle(questionAlternativeOrder);
+  placeHolderWidget[questionAlternativeOrder[0]] = (rightAnswer(questionAlternativeOrder[0],Text(questionAlternativeListHTML[1].text), Colors.blue));
+  for (int i = 2; i<questionAlternativeListHTML.length; i++) {
+    var questionAlternativeText = Text(questionAlternativeListHTML[i].text);
+    placeHolderWidget[questionAlternativeOrder[i-1]] = (wrongAnswer(questionAlternativeOrder[i-1],questionAlternativeText, Colors.blue));
   }
-  var homo = <Widget>[Text(dick[0].text),Column(
-      children: fuckshitup
+  var questionColumnLocal = <Widget>[Text(questionAlternativeListHTML[0].text),Column(
+      children: placeHolderWidget
   )];
-  return homo;
+  return questionColumnLocal;
 };

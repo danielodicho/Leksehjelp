@@ -1,10 +1,13 @@
+import 'package:chaleno/chaleno.dart';
 import 'package:flutter/material.dart';
-import "functions.dart";
 import "package:quiz_test/Pages.dart";
 
 
+
+
 void main() async {
-  await start();
+  subjectListHTML =
+      await Chaleno().load('https://donekun.github.io/quiz-test/subject_list');
   runApp(MyApp());
 }
 
