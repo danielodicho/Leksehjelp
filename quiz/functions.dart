@@ -52,7 +52,7 @@ List shuffle(List items) {
 var wrongAnswer = (index,questionAlternativeTextLocal,wrongColor) {
   return Container(
       child: ElevatedButton(child: questionAlternativeTextLocal, onPressed: () {
-        title = "Hahaha you dumb as fuck";
+        title = "Better luck next time";
         answeredRight = false;
         placeHolderWidget[index] = wrongAnswer(index,questionAlternativeTextLocal, Colors.red);
         questionColumn[1] = Column(children: placeHolderWidget);
@@ -69,7 +69,7 @@ var rightAnswer = (index,nah,rightColor) {
   // ignore: top_level_function_literal_block, top_level_function_literal_block
   return Container(
       child: ElevatedButton(child: nah, onPressed: () {
-        title = "You smart af";
+        title = "Good job!";
         if (answeredRight)
         {score+=1;}
         answeredRight = false;

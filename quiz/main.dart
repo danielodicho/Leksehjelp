@@ -6,7 +6,7 @@ import "package:quiz_test/Pages.dart";
 
 
 void main() async {
-  subjectListHTML =
+  subjectListDocument =
       await Chaleno().load('https://donekun.github.io/quiz-test/subject_list');
   runApp(MyApp());
 }

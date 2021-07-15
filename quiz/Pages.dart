@@ -10,7 +10,7 @@ var addArticleButtons;
 var quizButtons = <Widget>[];
 var quizListDocumentTagNameH;
 var quizListDocumentClassNameArticle;
-var subjectListHTML;
+var subjectListDocument;
 var loadQuizPage;
 var subjectList = <Widget>[];
 var loadArticle;
@@ -54,7 +54,7 @@ class _SubjectListPageState extends State<SubjectListPage> {
   void initState() {
     var subjectListCreateButtonsColumn = () {
       var tempSubjectList = <Widget>[];
-      var subjectListHeaders = subjectListHTML.getElementsByTagName("h");
+      var subjectListHeaders = subjectListDocument.getElementsByTagName("h");
       for (var i = 0; i < subjectListHeaders!.length; i++) {
         var subject = subjectListHeaders[i];
         var tempText = subject.text;
@@ -151,6 +151,12 @@ class _SubjectContentPageState extends State<SubjectContentPage> {
                 // ignore: close_sinks
                 YoutubePlayerController _controller = YoutubePlayerController(
                   initialVideoId: articleVideoYoutubeID.toString(),
+                  params: YoutubePlayerParams(
+                    showFullscreenButton: true,
+                    showControls: true,
+                    autoPlay: false,
+
+                  ),
                 );
                 articleTextList.add(
                   Container(
