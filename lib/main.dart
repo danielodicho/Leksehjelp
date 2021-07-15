@@ -1,4 +1,5 @@
 import 'package:chat_app/helper/authenticate.dart';
+import 'package:chat_app/views/search.dart';
 import 'package:chat_app/views/signin.dart';
 import 'package:flutter/material.dart';
 import 'package:chat_app/views/signup.dart';
@@ -19,7 +20,7 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primaryColor: Color(4291373098),
+        primaryColor: Color(4287218414),
       scaffoldBackgroundColor: Color(0xff1F1F1F),
         primarySwatch: Colors.blue,
       ),

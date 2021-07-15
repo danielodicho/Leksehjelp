@@ -3,7 +3,7 @@ import 'package:chat_app/views/signup.dart';
 import 'package:flutter/material.dart';
 
 class Authenticate extends StatefulWidget {
-  const Authenticate({Key? key}) : super(key: key);
+
 
   @override
   _AuthenticateState createState() => _AuthenticateState();
