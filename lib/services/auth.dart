@@ -19,7 +19,7 @@ class AuthMethods{
         return _userFromUser(firebaseUser!);
 
       }catch(e){
-        print(e);
+        print(e.toString());
       }
 
     }
@@ -45,7 +45,7 @@ class AuthMethods{
       try{
         return await _auth.signOut();
       }catch(e){
-
+        print(e.toString());
       }
     }
 
