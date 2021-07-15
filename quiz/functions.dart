@@ -4,7 +4,6 @@ import 'package:chaleno/chaleno.dart';
 
 var score = 0;
 var answeredRight  = true;
-void changeHomo;
 var counter = 1;
 var nextButtonString = "Next";
 var numQuestions = 3;
